@@ -234,4 +234,86 @@ public class WeightController {
         }
         return "redirect:/";
     }
+    // 編集ページを表示
+@GetMapping("/edit")
+public String showEditPage(Model model) {
+    // 現在ログインしているユーザーのIDを取得
+    Integer userId = userService.getCurrentUserId();
+    if (userId == null) {
+        return "redirect:/login";
+    }
+    
+    // ユーザー情報を取得
+    User currentUser = userService.getUserById(userId);
+    model.addAttribute("user", currentUser);
+    
+    // ユーザーの体重記録を取得
+    List<WeightRecord> records = weightService.getWeightRecordsByUserId(userId);
+    model.addAttribute("weightRecords", records);
+    
+    // 平均体重を計算
+    Double averageWeight = weightService.calculateAverageWeight(userId);
+    model.addAttribute("averageWeight", averageWeight);
+    
+    return "edit";
+}
+
+// 個別の編集ページを表示
+@GetMapping("/edit/{id}")
+public String showEditForm(@PathVariable("id") Long id, Model model) {
+    // 現在ログインしているユーザーのIDを取得
+    Integer userId = userService.getCurrentUserId();
+    if (userId == null) {
+        return "redirect:/login";
+    }
+    
+    try {
+        // 体重記録を取得
+        WeightRecord record = weightService.getWeightRecordById(id);
+        
+        // 記録が現在のユーザーのものか確認
+        if (!record.getUserId().equals(userId)) {
+            return "redirect:/edit";  // 他のユーザーの記録へのアクセスを拒否
+        }
+        
+        model.addAttribute("weightRecord", record);
+        
+        return "edit-form";
+    } catch (Exception e) {
+        System.err.println("編集フォーム表示エラー: " + e.getMessage());
+        return "redirect:/edit?error=true";
+    }
+}
+
+// 体重記録を更新
+@PostMapping("/update/{id}")
+public String updateWeight(@PathVariable("id") Long id,
+                          @RequestParam("weight") Double weight,
+                          @RequestParam("recordedDate") String recordedDateStr) {
+    try {
+        // 現在ログインしているユーザーのIDを取得
+        Integer userId = userService.getCurrentUserId();
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        
+        // 記録が現在のユーザーのものか確認
+        WeightRecord record = weightService.getWeightRecordById(id);
+        if (!record.getUserId().equals(userId)) {
+            return "redirect:/edit";  // 他のユーザーの記録の更新を拒否
+        }
+        
+        // 日付の変換
+        LocalDate recordedDate = LocalDate.parse(recordedDateStr);
+        
+        // 体重記録を更新
+        weightService.updateWeightRecord(id, weight, recordedDate);
+        
+        return "redirect:/edit?updated=true";
+    } catch (Exception e) {
+        System.err.println("更新エラー: " + e.getMessage());
+        return "redirect:/edit?error=true";
+    }
+}
+
 }

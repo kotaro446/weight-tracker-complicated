@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 public class WeightService {
@@ -96,5 +97,15 @@ public class WeightService {
     public WeightRecord saveWeightRecord(Integer userId, Double weight, LocalDate recordedDate) {
         WeightRecord record = new WeightRecord(userId, weight, recordedDate);
         return weightRecordRepository.save(record);
+    }
+
+    // 体重記録を更新
+    public WeightRecord updateWeightRecord(Long id, Double weight, LocalDate recordedDate) {
+    WeightRecord record = getWeightRecordById(id);
+    record.setWeight(weight);
+    record.setRecordedDate(recordedDate);
+    record.setTimestamp(LocalDateTime.now()); // 更新日時も更新
+    return weightRecordRepository.save(record);
+
     }
 }
