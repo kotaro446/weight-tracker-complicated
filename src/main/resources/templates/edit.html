@@ -244,6 +244,11 @@
                 transform: translateY(0);
             }
         }
+
+        .clickable-row:hover {
+            background-color: rgba(26, 188, 156, 0.12) !important;
+            transform: scale(1.01);
+        }
     </style>
 </head>
 
@@ -347,7 +352,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="record : ${weightRecords}" class="edit-row">
+                            <tr th:each="record : ${weightRecords}" class="edit-row clickable-row"
+                                th:data-edit-url="@{/edit/{id}(id=${record.id})}" style="cursor: pointer;">
+
                                 <td>
                                     <strong th:text="${record.recordedDate}">2025-05-01</strong>
                                 </td>
@@ -486,6 +493,17 @@
 
                 if (confirm('⚠️ この記録を削除してもよろしいですか？\n\n削除した記録は復元できません。\n平均体重やランキングも再計算されます。')) {
                     window.location.href = link.href;
+                }
+            }
+        });
+        // 行クリックで編集ページに移動
+        document.addEventListener('click', function (e) {
+            const row = e.target.closest('.clickable-row');
+            if (row && !e.target.closest('.btn-group')) {
+                // ボタンがクリックされた場合は行の処理をスキップ
+                const editUrl = row.dataset.editUrl;
+                if (editUrl) {
+                    window.location.href = editUrl;
                 }
             }
         });

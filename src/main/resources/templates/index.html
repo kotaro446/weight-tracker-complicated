@@ -287,6 +287,15 @@
                 padding: 1rem;
             }
         }
+
+        .weight-table tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .weight-table tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.1) !important;
+        }
     </style>
 </head>
 
@@ -442,13 +451,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="record, stat : ${weightRecords}" th:if="${stat.index < 5}">
+                            <tr th:each="record, stat : ${weightRecords}" th:if="${stat.index < 5}"
+                                th:onclick="'window.location.href=\'/edit/' + ${record.id} + '\';'"
+                                style="cursor: pointer;">
                                 <td>
-                                    <a th:href="@{/details/{id}(id=${record.id})}"
-                                        class="text-decoration-none fw-semibold text-primary">
-                                        <i class="fas fa-link me-1"></i>
+                                    <span class="text-decoration-none fw-semibold text-primary">
+                                        <i class="fas fa-calendar me-1"></i>
                                         <span th:text="${record.recordedDate}">2025-05-01</span>
-                                    </a>
+                                    </span>
                                 </td>
                                 <td class="fw-semibold" th:text="${record.weight} + ' kg'">70.0 kg</td>
                                 <td th:if="${averageWeight != null}">
@@ -461,7 +471,7 @@
                                 <td th:unless="${averageWeight != null}">
                                     <span class="text-muted">--</span>
                                 </td>
-                                <td>
+                                <td class="action-buttons" onclick="event.stopPropagation();">
                                     <div class="btn-group btn-group-sm">
                                         <a th:href="@{/edit/{id}(id=${record.id})}"
                                             class="btn btn-outline-primary d-flex align-items-center justify-content-center"
@@ -477,6 +487,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            <!-- 空の状態の行はそのまま -->
                             <tr th:if="${weightRecords == null || weightRecords.isEmpty()}">
                                 <td colspan="4" class="empty-state">
                                     <div>

@@ -24,14 +24,6 @@
             padding-top: 56px;
         }
 
-        .dashboard-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            border-radius: 0 0 10px 10px;
-        }
-
         .navbar {
             background-color: var(--secondary-color);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -51,11 +43,17 @@
             color: white !important;
         }
 
-        .page-header {
+        .nav-link.active {
+            color: white !important;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .dashboard-header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
         }
 
         .card {
@@ -134,8 +132,9 @@
             </div>
         </div>
     </nav>
+
     <!-- ページヘッダー -->
-    <header class="page-header">
+    <header class="dashboard-header">
         <div class="container">
             <h1 class="display-5 fw-bold"><i class="fas fa-edit me-2"></i>編集操作</h1>
             <p class="lead">記録内容を変更して更新してください</p>
