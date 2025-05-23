@@ -44,7 +44,7 @@
         }
 
         .page-header {
-            background: linear-gradient(135deg, var(--warning-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
@@ -76,7 +76,7 @@
 
         .edit-form {
             background-color: rgba(243, 156, 18, 0.05);
-            border-left: 4px solid var(--warning-color);
+            border-left: 4px solid var(--primary-color);
         }
 
         .current-info {
@@ -131,7 +131,7 @@
     <!-- ページヘッダー -->
     <header class="page-header">
         <div class="container">
-            <h1 class="display-5 fw-bold"><i class="fas fa-edit me-2"></i>体重記録編集</h1>
+            <h1 class="display-5 fw-bold"><i class="fas fa-edit me-2"></i>編集操作</h1>
             <p class="lead">記録内容を変更して更新してください</p>
         </div>
     </header>
@@ -211,7 +211,7 @@
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-warning btn-lg">
+                                <button type="submit" class="btn btn-primary btn-lg">
                                     <i class="fas fa-save me-2"></i>更新する
                                 </button>
                                 <a href="/edit" class="btn btn-outline-secondary">
@@ -220,7 +220,7 @@
                             </div>
                         </form>
 
-                        <div class="alert alert-warning mt-4">
+                        <div class="alert alert-primary mt-4">
                             <i class="fas fa-exclamation-triangle me-2"></i>
                             <strong>注意：</strong>更新すると平均体重やランクが再計算されます。
                         </div>
@@ -259,12 +259,8 @@
                     <h5><i class="fas fa-weight me-2"></i>ウェイトトラッカー</h5>
                     <p class="small">あなたの健康をサポートする体重維持アプリ</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="small text-muted">
-                        <i class="fas fa-edit me-1"></i>安全に記録を編集
-                    </div>
-                </div>
             </div>
+        </div>
         </div>
     </footer>
 
