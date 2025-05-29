@@ -61,13 +61,6 @@ public class WeightController {
             model.addAttribute("rank", rank);
         }
         
-        // 目標体重との差を計算（目標体重が設定されている場合）
-        if (currentUser.getTargetWeight() != null && !records.isEmpty()) {
-            Double latestWeight = records.get(0).getWeight();
-            Double targetDifference = latestWeight - currentUser.getTargetWeight();
-            model.addAttribute("targetDifference", targetDifference);
-        }
-        
         // 天気情報を取得して追加
         Map<String, Object> weatherData = weatherService.getDefaultCityWeather();
         model.addAttribute("weatherData", weatherData);
@@ -141,18 +134,6 @@ public class WeightController {
         model.addAttribute("user", currentUser);
         
         return "settings";
-    }
-    
-    // 目標体重の設定を処理
-    @PostMapping("/settings/target-weight")
-    public String updateTargetWeight(@RequestParam("targetWeight") Double targetWeight) {
-        Integer userId = userService.getCurrentUserId();
-        if (userId == null) {
-            return "redirect:/login";
-        }
-        
-        userService.updateTargetWeight(userId, targetWeight);
-        return "redirect:/settings";
     }
     
     // 詳細ページを表示
@@ -285,35 +266,6 @@ public String showEditForm(@PathVariable("id") Long id, Model model) {
     }
 }
 
-// 体重記録を更新
-@PostMapping("/update/{id}")
-public String updateWeight(@PathVariable("id") Long id,
-                          @RequestParam("weight") Double weight,
-                          @RequestParam("recordedDate") String recordedDateStr) {
-    try {
-        // 現在ログインしているユーザーのIDを取得
-        Integer userId = userService.getCurrentUserId();
-        if (userId == null) {
-            return "redirect:/login";
-        }
-        
-        // 記録が現在のユーザーのものか確認
-        WeightRecord record = weightService.getWeightRecordById(id);
-        if (!record.getUserId().equals(userId)) {
-            return "redirect:/edit";  // 他のユーザーの記録の更新を拒否
-        }
-        
-        // 日付の変換
-        LocalDate recordedDate = LocalDate.parse(recordedDateStr);
-        
-        // 体重記録を更新
-        weightService.updateWeightRecord(id, weight, recordedDate);
-        
-        return "redirect:/edit?updated=true";
-    } catch (Exception e) {
-        System.err.println("更新エラー: " + e.getMessage());
-        return "redirect:/edit?error=true";
-    }
-}
+
 
 }

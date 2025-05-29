@@ -485,17 +485,8 @@
             });
         });
 
-        // 削除確認の改善
-        document.addEventListener('click', function (e) {
-            if (e.target.closest('.btn-outline-danger')) {
-                e.preventDefault();
-                const link = e.target.closest('.btn-outline-danger');
 
-                if (confirm('⚠️ この記録を削除してもよろしいですか？\n\n削除した記録は復元できません。\n平均体重やランキングも再計算されます。')) {
-                    window.location.href = link.href;
-                }
-            }
-        });
+
         // 行クリックで編集ページに移動
         document.addEventListener('click', function (e) {
             const row = e.target.closest('.clickable-row');
