@@ -1,6 +1,10 @@
 社内研修グループワーク成果物
-<img width="1148" height="652" alt="image" src="https://github.com/user-attachments/assets/88a8c950-d48e-4d04-8b78-06de64db7aa3" />
 
-<img width="1148" height="2127" alt="image" src="https://github.com/user-attachments/assets/0ded5742-fd40-462d-9fe5-c4495daa0a40" />
 
-<img width="1148" height="3650" alt="image" src="https://github.com/user-attachments/assets/58ccdc90-c503-4594-b2f3-e5904672a2f8" />
+<img width="1029" height="2202" alt="screencapture-localhost-8443-2025-12-05-11_07_28" src="https://github.com/user-attachments/assets/cb1f4732-e2dd-469c-9bf9-2f53d70d00e1" />
+
+
+<img width="500" height="4079" alt="screencapture-localhost-8443-history-2025-12-05-11_05_28" src="https://github.com/user-attachments/assets/c0d1cda3-c73d-44bf-a1bf-ae8622cc1bbe" />
+
+
+<img width="500" height="3579" alt="image" src="https://github.com/user-attachments/assets/0ca6be90-bfeb-467d-bbb4-0a7060139be7" />
